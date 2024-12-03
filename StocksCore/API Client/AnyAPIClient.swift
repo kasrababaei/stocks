@@ -6,49 +6,43 @@ public let getAPIClient = bind(AnyAPIClient.self, lifetime: .singleton) {
 }
 
 public protocol AnyAPIClient: Sendable {
-  func fetch(
-    fileID: String,
-    function: String,
-    line: Int,
-    with url: URL
-  ) async -> Result<Data, any Error>
+  func fetch<T: Decodable>(with url: URL) async throws -> T
+  
+  func fetch(with url: URL) async throws -> Data
   
   func fetch(
-    fileID: String,
-    function: String,
-    line: Int,
     with url: URL,
     completionHandler: @escaping @Sendable (Result<Data, any Error>) -> Void
   ) -> any Cancellable
 }
 
 private final class APIClient: AnyAPIClient {
+  func fetch<T>(with url: URL) async throws -> T where T : Decodable {
+    let data = try await fetch(with: url)
+    return try JSONDecoder().decode(T.self, from: data)
+  }
+  
   func fetch(
-    fileID: String = #fileID,
-    function: String = #function,
-    line: Int = #line,
     with url: URL
-  ) async -> Result<Data, any Error> {
-    ConsoleLogger.log(
-      fileID: fileID,
-      function: function,
-      line: line,
-      level: .info,
-      url.debugDescription
-    )
+  ) async throws -> Data {
+    ConsoleLogger.log(level: .info, url.debugDescription)
     
     let atomicCancellable = AtomicCancellable()
     let failure = Result<Data, any Error>.failure(CancellationError())
     
-    return await withTaskCancellationHandler {
-      guard !Task.isCancelled else { return failure }
+    return try await withTaskCancellationHandler {
+      try Task.checkCancellation()
       
-      return await withCheckedContinuation { continuation in
+      return try await withCheckedThrowingContinuation { continuation in
         let hasContinued = Atomic(false)
         let resumeWith: @Sendable (Result<Data, any Error>) -> Void = { result in
           hasContinued.withLock { hasContinued in
             guard !hasContinued else { return }
-            continuation.resume(returning: result)
+            do {
+              try continuation.resume(returning: result.get())
+            } catch {
+              continuation.resume(throwing: error)
+            }
             hasContinued = true
           }
         }
@@ -79,19 +73,10 @@ private final class APIClient: AnyAPIClient {
   }
   
   func fetch(
-    fileID: String = #fileID,
-    function: String = #function,
-    line: Int = #line,
     with url: URL,
     completionHandler: @escaping @Sendable (Result<Data, any Error>) -> Void
   ) -> any Cancellable {
-    ConsoleLogger.log(
-      fileID: fileID,
-      function: function,
-      line: line,
-      level: .info,
-      url.debugDescription
-    )
+    ConsoleLogger.log(level: .info, url.debugDescription)
     
     let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
     

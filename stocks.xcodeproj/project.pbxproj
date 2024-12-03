@@ -40,15 +40,54 @@
 		608A71F02CFAAF050081E8EC /* StocksCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StocksCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		604024AD2CFD65D100FBBE15 /* Exceptions for "StocksCore" folder in "Stocks" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"API Client/AnyAPIClient.swift",
+				"API Client/APIClientError.swift",
+				"API Client/Server.swift",
+				"API Client/URLSession.swift",
+				Atomic/Atomic.swift,
+				Atomic/AtomicCancellable.swift,
+				"Combine/AnyPublisher+Never.swift",
+				ConsoleLogger/ConsoleLogger.swift,
+				DI/IndirectInstantiation.swift,
+				DI/Lifetime.swift,
+			);
+			target = 608A71D02CFAAD130081E8EC /* Stocks */;
+		};
+		604024AE2CFD65D100FBBE15 /* Exceptions for "StocksCore" folder in "StocksCore" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"API Client/AnyAPIClient.swift",
+				"API Client/APIClientError.swift",
+				"API Client/Server.swift",
+				"API Client/URLSession.swift",
+				Atomic/Atomic.swift,
+				Atomic/AtomicCancellable.swift,
+				"Combine/AnyPublisher+Never.swift",
+				ConsoleLogger/ConsoleLogger.swift,
+				DI/IndirectInstantiation.swift,
+				DI/Lifetime.swift,
+			);
+			target = 608A71EF2CFAAF050081E8EC /* StocksCore */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		604024A32CFD65D100FBBE15 /* StocksCore */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				604024AD2CFD65D100FBBE15 /* Exceptions for "StocksCore" folder in "Stocks" target */,
+				604024AE2CFD65D100FBBE15 /* Exceptions for "StocksCore" folder in "StocksCore" target */,
+			);
+			path = StocksCore;
+			sourceTree = "<group>";
+		};
 		608A71D32CFAAD130081E8EC /* Stocks */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Stocks;
-			sourceTree = "<group>";
-		};
-		608A71F12CFAAF050081E8EC /* StocksCore */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StocksCore;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				608A71D32CFAAD130081E8EC /* Stocks */,
-				608A71F12CFAAF050081E8EC /* StocksCore */,
+				604024A32CFD65D100FBBE15 /* StocksCore */,
 				608A71D22CFAAD130081E8EC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,6 +157,7 @@
 				608A71F52CFAAF050081E8EC /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				604024A32CFD65D100FBBE15 /* StocksCore */,
 				608A71D32CFAAD130081E8EC /* Stocks */,
 			);
 			name = Stocks;
@@ -139,9 +179,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				608A71F12CFAAF050081E8EC /* StocksCore */,
 			);
 			name = StocksCore;
 			packageProductDependencies = (
