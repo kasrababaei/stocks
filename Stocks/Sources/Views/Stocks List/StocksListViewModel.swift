@@ -9,6 +9,7 @@ final class StocksListViewModel: StocksListViewViewModel {
   var error: AnyPublisher<Error, Never> = .never()
   
   private var stocks: [Stock] = []
+  
   private var isLoading = false
   
   func loadData() async {
@@ -43,15 +44,19 @@ final class StocksListViewModel: StocksListViewViewModel {
     
     items.append(contentsOf: stocks[start...end].map { Item(stock: $0) })
   }
-}
-
-extension StocksListViewModel {
-  struct Item: StockRowViewModel, Identifiable {
-    let id: String = UUID().uuidString
-    var ticker: String { stock.ticker }
-    var name: String { stock.name }
-    var currentPrice: String { "$\(stock.currentPrice)" }
-    
-    let stock: Stock
+  
+  private var searchTask: Task<Void, Never>?
+  
+  func searchBarTextDidChange(_ searchText: String) {
+    searchTask?.cancel()
+    searchTask = Task { [weak self] in
+      try? await Task.sleep(for: .seconds(0.5))
+      guard !Task.isCancelled else { return }
+      self?.filterStocks(searchText)
+    }
+  }
+  
+  private func filterStocks(_ searchText: String) {
+    ConsoleLogger.log(searchText)
   }
 }

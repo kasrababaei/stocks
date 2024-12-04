@@ -1,13 +1,12 @@
-struct Stock: Decodable, Identifiable, Equatable {
-  var id: String { name + ticker }
-  let name: String
-  let ticker: String
-  let currentPrice: Double
+public struct Stock: Decodable, Equatable, Sendable {
+  public let name: String
+  public let ticker: String
+  public let currentPrice: Double
 }
 
 #if DEBUG
 extension Stock {
-  static func mockData(count: Int = 300) -> [Stock] {
+  public static func mockData(count: Int = 300) -> [Stock] {
     (0..<count).map {
       Stock(
         name: "Stock Name [\($0)]",

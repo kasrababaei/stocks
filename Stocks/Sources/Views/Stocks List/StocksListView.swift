@@ -12,6 +12,7 @@ protocol StocksListViewViewModel: ObservableObject {
   
   func loadData() async
   func loadNext() async
+  func searchBarTextDidChange(_ searchText: String)
 }
 
 struct StocksListView<ViewModel: StocksListViewViewModel>: View {
@@ -20,6 +21,9 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
   
   @State
   private var isLoading = false
+  
+  @State 
+  private var searchText = ""
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -42,6 +46,10 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
           }
           .padding(.horizontal)
         }
+        
+        if isLoading {
+          ProgressView()
+        }
       }
     }
     .refreshable { [viewModel] in
@@ -56,12 +64,15 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
     .task { [viewModel] in
       ConsoleLogger.log()
       
-      
       isLoading = true
       await viewModel.loadData()
       isLoading = false
     }
+    .onChange(of: searchText) { [viewModel] searchText in
+      viewModel.searchBarTextDidChange(searchText)
+    }
     .navigationTitle("Stocks List")
+    .searchable(text: $searchText, prompt: Text("Search by name or ticker"))
   }
 }
 
@@ -90,6 +101,10 @@ private final class MockViewModel: StocksListViewViewModel {
     let end = start + 10
     guard end < mockData.count else { return }
     items.append(contentsOf: mockData[start...end].map(Item.init))
+  }
+  
+  func searchBarTextDidChange(_ searchText: String) {
+    //
   }
 }
 
