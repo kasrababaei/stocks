@@ -1,6 +1,7 @@
 import Combine
 import Foundation
 import StocksCore
+import StocksLogger
 import SwiftUI
 
 @MainActor
@@ -11,19 +12,16 @@ protocol StocksListViewViewModel: ObservableObject {
   var error: AnyPublisher<Error, Never> { get }
   
   func loadData() async
-  func loadNext() async
+  func loadNext()
   func searchBarTextDidChange(_ searchText: String)
 }
 
 struct StocksListView<ViewModel: StocksListViewViewModel>: View {
-  @ObservedObject
-  private var viewModel: ViewModel
+  @ObservedObject private var viewModel: ViewModel
   
-  @State
-  private var isLoading = false
-  
-  @State 
-  private var searchText = ""
+  @State private var isLoading = false
+  @State private var searchText = ""
+  @Environment(\.isSearching) private var isSearching
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -32,62 +30,49 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
   var body: some View {
     ScrollView {
       LazyVStack {
-        ForEach(viewModel.items) { item in
-          VStack(spacing: 8) {
-            StockRow(viewModel: item)
-            Divider()
-          }
-          .task { [viewModel] in
-            guard item.id == viewModel.items.last?.id else {
-              return
-            }
-            
-            await viewModel.loadNext()
-          }
-          .padding(.horizontal)
-        }
+        ForEach(viewModel.items) { StockRow(viewModel: $0) }
         
         if isLoading {
           ProgressView()
         }
+        
+        Color.clear
+          .onAppear { [viewModel] in viewModel.loadNext() }
+          .id(viewModel.items.last?.id)
       }
     }
-    .refreshable { [viewModel] in
-      ConsoleLogger.log()
-      
-      guard !isLoading else { return }
-      viewModel.items = []
-      isLoading = true
-      await viewModel.loadData()
-      isLoading = false
-    }
-    .task { [viewModel] in
-      ConsoleLogger.log()
-      
-      isLoading = true
-      await viewModel.loadData()
-      isLoading = false
-    }
+    .refreshable { await refresh() }
+    .task { await loadData() }
+    .searchable(text: $searchText, prompt: Text("Search by name or ticker"))
     .onChange(of: searchText) { [viewModel] searchText in
       viewModel.searchBarTextDidChange(searchText)
     }
     .navigationTitle("Stocks List")
-    .searchable(text: $searchText, prompt: Text("Search by name or ticker"))
+  }
+  
+  private func refresh() async {
+    ConsoleLogger.log()
+    
+    guard !isLoading else { return }
+    viewModel.items = []
+    isLoading = true
+    defer { isLoading = false }
+    await viewModel.loadData()
+  }
+  
+  private func loadData() async {
+    ConsoleLogger.log()
+    
+    isLoading = true
+    defer { isLoading = false }
+    await viewModel.loadData()
   }
 }
 
 #if DEBUG
 private final class MockViewModel: StocksListViewViewModel {
-  struct Item: StockRowViewModel, Identifiable {
-    let id = UUID().uuidString
-    var ticker: String { stock.ticker }
-    var name: String { stock.name }
-    var currentPrice: String { "$\(stock.currentPrice)" }
-    
-    let stock: Stock
-  }
-  
   @Published var items: [Item] = []
+  let searchResult: [Item] = []
   var error: AnyPublisher<Error, Never> = .never()
   
   private let mockData: [Stock] = Stock.mockData(count: 50)
@@ -96,7 +81,7 @@ private final class MockViewModel: StocksListViewViewModel {
     items = Array(mockData.prefix(10)).map(Item.init)
   }
   
-  func loadNext() async {
+  func loadNext() {
     let start = items.count
     let end = start + 10
     guard end < mockData.count else { return }
@@ -105,6 +90,17 @@ private final class MockViewModel: StocksListViewViewModel {
   
   func searchBarTextDidChange(_ searchText: String) {
     //
+  }
+}
+
+extension MockViewModel {
+  struct Item: StockRowViewModel, Identifiable {
+    let id = UUID().uuidString
+    var ticker: String { stock.ticker }
+    var name: String { stock.name }
+    var currentPrice: String { "$\(stock.currentPrice)" }
+    
+    let stock: Stock
   }
 }
 

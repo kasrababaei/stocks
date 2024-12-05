@@ -10,6 +10,8 @@
 		608A71F62CFAAF050081E8EC /* StocksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; };
 		608A71F72CFAAF050081E8EC /* StocksCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60DDA7D72D001243003B4BF9 /* StocksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; };
+		60DDA8302D015211003B4BF9 /* StocksLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DDA82A2D015211003B4BF9 /* StocksLogger.framework */; };
+		60DDA8312D015211003B4BF9 /* StocksLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 60DDA82A2D015211003B4BF9 /* StocksLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,13 @@
 			remoteGlobalIDString = 608A71EF2CFAAF050081E8EC;
 			remoteInfo = StocksCore;
 		};
+		60DDA82E2D015211003B4BF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 608A71C92CFAAD130081E8EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60DDA8292D015211003B4BF9;
+			remoteInfo = StocksLogger;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +46,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				608A71F72CFAAF050081E8EC /* StocksCore.framework in Embed Frameworks */,
+				60DDA8312D015211003B4BF9 /* StocksLogger.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,6 +57,7 @@
 		608A71D12CFAAD130081E8EC /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		608A71F02CFAAF050081E8EC /* StocksCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StocksCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DDA7D32D001243003B4BF9 /* StocksCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StocksCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DDA82A2D015211003B4BF9 /* StocksLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StocksLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -60,7 +71,6 @@
 				Atomic/Atomic.swift,
 				Atomic/AtomicCancellable.swift,
 				"Combine/AnyPublisher+Never.swift",
-				ConsoleLogger/ConsoleLogger.swift,
 				DI/IndirectInstantiation.swift,
 				DI/Lifetime.swift,
 				"Trie Node/TrieNode.swift",
@@ -77,7 +87,6 @@
 				Atomic/Atomic.swift,
 				Atomic/AtomicCancellable.swift,
 				"Combine/AnyPublisher+Never.swift",
-				ConsoleLogger/ConsoleLogger.swift,
 				DI/IndirectInstantiation.swift,
 				DI/Lifetime.swift,
 				"Trie Node/TrieNode.swift",
@@ -106,6 +115,11 @@
 			path = StocksCoreTests;
 			sourceTree = "<group>";
 		};
+		60DDA82B2D015211003B4BF9 /* StocksLogger */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = StocksLogger;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				608A71F62CFAAF050081E8EC /* StocksCore.framework in Frameworks */,
+				60DDA8302D015211003B4BF9 /* StocksLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +147,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		60DDA8272D015211003B4BF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -141,6 +163,7 @@
 				608A71D32CFAAD130081E8EC /* Stocks */,
 				604024A32CFD65D100FBBE15 /* StocksCore */,
 				60DDA7D42D001243003B4BF9 /* StocksCoreTests */,
+				60DDA82B2D015211003B4BF9 /* StocksLogger */,
 				608A71D22CFAAD130081E8EC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -151,6 +174,7 @@
 				608A71D12CFAAD130081E8EC /* Stocks.app */,
 				608A71F02CFAAF050081E8EC /* StocksCore.framework */,
 				60DDA7D32D001243003B4BF9 /* StocksCoreTests.xctest */,
+				60DDA82A2D015211003B4BF9 /* StocksLogger.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +183,13 @@
 
 /* Begin PBXHeadersBuildPhase section */
 		608A71EB2CFAAF050081E8EC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DDA8252D015211003B4BF9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -181,6 +212,7 @@
 			);
 			dependencies = (
 				608A71F52CFAAF050081E8EC /* PBXTargetDependency */,
+				60DDA82F2D015211003B4BF9 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				604024A32CFD65D100FBBE15 /* StocksCore */,
@@ -236,6 +268,29 @@
 			productReference = 60DDA7D32D001243003B4BF9 /* StocksCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		60DDA8292D015211003B4BF9 /* StocksLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60DDA8322D015211003B4BF9 /* Build configuration list for PBXNativeTarget "StocksLogger" */;
+			buildPhases = (
+				60DDA8252D015211003B4BF9 /* Headers */,
+				60DDA8262D015211003B4BF9 /* Sources */,
+				60DDA8272D015211003B4BF9 /* Frameworks */,
+				60DDA8282D015211003B4BF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				60DDA82B2D015211003B4BF9 /* StocksLogger */,
+			);
+			name = StocksLogger;
+			packageProductDependencies = (
+			);
+			productName = StocksLogger;
+			productReference = 60DDA82A2D015211003B4BF9 /* StocksLogger.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -254,6 +309,9 @@
 						LastSwiftMigration = 1610;
 					};
 					60DDA7D22D001243003B4BF9 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					60DDA8292D015211003B4BF9 = {
 						CreatedOnToolsVersion = 16.1;
 					};
 				};
@@ -275,6 +333,7 @@
 				608A71D02CFAAD130081E8EC /* Stocks */,
 				608A71EF2CFAAF050081E8EC /* StocksCore */,
 				60DDA7D22D001243003B4BF9 /* StocksCoreTests */,
+				60DDA8292D015211003B4BF9 /* StocksLogger */,
 			);
 		};
 /* End PBXProject section */
@@ -295,6 +354,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		60DDA7D12D001243003B4BF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DDA8282D015211003B4BF9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -325,6 +391,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		60DDA8262D015211003B4BF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -337,6 +410,11 @@
 			isa = PBXTargetDependency;
 			target = 608A71EF2CFAAF050081E8EC /* StocksCore */;
 			targetProxy = 60DDA7D82D001243003B4BF9 /* PBXContainerItemProxy */;
+		};
+		60DDA82F2D015211003B4BF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60DDA8292D015211003B4BF9 /* StocksLogger */;
+			targetProxy = 60DDA82E2D015211003B4BF9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -549,6 +627,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -587,6 +666,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -641,6 +721,76 @@
 			};
 			name = Release;
 		};
+		60DDA8332D015211003B4BF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasrababaei.StocksLogger;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		60DDA8342D015211003B4BF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasrababaei.StocksLogger;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -676,6 +826,15 @@
 			buildConfigurations = (
 				60DDA7DB2D001243003B4BF9 /* Debug */,
 				60DDA7DC2D001243003B4BF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60DDA8322D015211003B4BF9 /* Build configuration list for PBXNativeTarget "StocksLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60DDA8332D015211003B4BF9 /* Debug */,
+				60DDA8342D015211003B4BF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -3,9 +3,13 @@ import Foundation
 final public class Trie<T> {
   private var root: TrieNode<T>?
   
+  public init() {
+    self.root = .init()
+  }
+  
   public init(_ word: String, value: T) {
     self.root = TrieNode()
-    self.root?.add(word.uppercased(), value: value)
+    insert(word, value: value)
   }
   
   public init(_ words: [String], values: [T]) throws {
@@ -14,8 +18,20 @@ final public class Trie<T> {
     }
     
     self.root = TrieNode()
+    insert(words, values: values)
+  }
+  
+  public func removeAll() {
+    root = TrieNode()
+  }
+  
+  public func insert(_ word: String, value: T) {
+    root?.add(word.uppercased(), value: value)
+  }
+  
+  public func insert(_ words: [String], values: [T]) {
     for (word, value) in zip(words, values) {
-      self.root?.add(word.uppercased(), value: value)
+      root?.add(word.uppercased(), value: value)
     }
   }
   

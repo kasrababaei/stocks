@@ -1,6 +1,6 @@
 import Combine
 import Foundation
-import os.log
+import StocksLogger
 
 let getURLSession = bind(AnyURLSession.self) {
   URLSession()

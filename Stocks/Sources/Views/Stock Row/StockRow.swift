@@ -10,16 +10,21 @@ struct StockRow<ViewModel: StockRowViewModel>: View {
   let viewModel: ViewModel
   
   var body: some View {
-    HStack(alignment: .top, spacing: 16) {
-      VStack(alignment: .leading, spacing: 8) {
-        Text(viewModel.ticker.prefix(3))
-        Text(viewModel.name)
-          .foregroundStyle(.secondary)
+    VStack(spacing: 8) {
+      HStack(alignment: .top, spacing: 16) {
+        VStack(alignment: .leading, spacing: 8) {
+          Text(viewModel.ticker.prefix(3))
+          Text(viewModel.name)
+            .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
+        Text(viewModel.currentPrice)
       }
-      .frame(maxWidth: .infinity, alignment: .leading)
       
-      Text(viewModel.currentPrice)
+      Divider()
     }
+    .padding(.horizontal)
   }
 }
 

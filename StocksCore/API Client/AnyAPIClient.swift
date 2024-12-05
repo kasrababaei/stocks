@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import StocksLogger
 
 public let getAPIClient = bind(AnyAPIClient.self, lifetime: .singleton) {
   APIClient()
