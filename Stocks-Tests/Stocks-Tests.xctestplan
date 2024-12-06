@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "C67DADBF-41FA-40EF-92EE-867F106D379F",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:stocks.xcodeproj",
+        "identifier" : "60DDA7D22D001243003B4BF9",
+        "name" : "StocksCore-Tests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:stocks.xcodeproj",
+        "identifier" : "60DDA9642D02B4EC003B4BF9",
+        "name" : "Stocks-Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

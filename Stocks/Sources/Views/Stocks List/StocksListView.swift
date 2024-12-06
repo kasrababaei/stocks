@@ -1,4 +1,3 @@
-import Combine
 import Foundation
 import StocksCore
 import StocksLogger
@@ -10,7 +9,8 @@ protocol StocksListViewViewModel: ObservableObject {
   
   var items: [Item] { get }
   var searchText: String { get set }
-  var error: AnyPublisher<Error, Never> { get }
+  var toast: Toast? { get set }
+  var contentUnavailable: Bool { get }
   
   func loadData() async
   func loadNext()
@@ -22,32 +22,43 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
   @State private var isLoading = false
   @State private var searchText = ""
   @State private var taskId = UUID()
+  @State private var isShowingToast = false
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
   }
   
   var body: some View {
-    ScrollView {
-      LazyVStack {
-        ForEach(viewModel.items) { StockRow(viewModel: $0) }
-        
-        if isLoading {
-          ProgressView()
+    NavigationStack {
+      ScrollView {
+        LazyVStack {
+          ForEach(viewModel.items) { StockRow(viewModel: $0) }
+          
+          if isLoading {
+            ProgressView()
+          }
+          
+          Color.clear
+            .onAppear { loadNext() }
+            .id(viewModel.items.last?.id)
         }
-        
-        Color.clear
-          .onAppear { loadNext() }
-          .id(viewModel.items.last?.id)
+      }
+      .refreshable {
+        guard !isLoading else { return }
+        taskId = UUID()
+      }
+      .task(id: taskId) { await loadData() }
+      .searchable(text: $viewModel.searchText, prompt: Text("Search by name or ticker"))
+      .navigationTitle("Stocks List")
+    }
+    .overlay {
+      if viewModel.contentUnavailable {
+        Button("Retry") {
+          Task { await loadData() }
+        }
       }
     }
-    .refreshable {
-      guard !isLoading else { return }
-      taskId = UUID()
-    }
-    .task(id: taskId) { await loadData() }
-    .searchable(text: $viewModel.searchText, prompt: Text("Search by name or ticker"))
-    .navigationTitle("Stocks List")
+    .present(toast: $viewModel.toast)
   }
   
   private func loadData() async {
@@ -73,7 +84,8 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
 private final class MockViewModel: StocksListViewViewModel {
   @Published var items: [Item] = []
   var searchText: String = ""
-  var error: AnyPublisher<Error, Never> = .never()
+  var toast: Toast? = nil
+  var contentUnavailable: Bool = false
   
   private let mockData: [Stock] = Stock.mockData(count: 50)
   

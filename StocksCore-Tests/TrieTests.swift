@@ -1,7 +1,13 @@
 import Testing
 @testable import StocksCore
+@testable import StocksLogger
 
 struct TrieTests {
+  init() {
+    Instantiator.mocking.withLock { $0 = .enabled(required: true) }
+    ConsoleLogger.isTesting = true
+  }
+  
   @Test("Should throw for unmatched length") func testInit() async throws {
     #expect(throws: Error.self) { try Trie([], values: [1]) }
     #expect(throws: Error.self) { try Trie(["One"], values: []) }

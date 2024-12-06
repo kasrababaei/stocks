@@ -1,6 +1,9 @@
 import OSLog
 
 public enum ConsoleLogger {
+  @usableFromInline
+  static var isTesting = false
+  
   @_transparent
   public static func log(
     fileID: String = #fileID,
@@ -9,6 +12,7 @@ public enum ConsoleLogger {
     level: Level = .debug,
     _ message: Any?...
   ) {
+    guard !isTesting else { return }
     let relativePathComponents = fileID.split(separator: "/")
     
     let logger = Logger(

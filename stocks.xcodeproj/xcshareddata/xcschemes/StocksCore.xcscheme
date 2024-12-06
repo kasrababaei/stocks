@@ -30,8 +30,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "60DDA7D22D001243003B4BF9"
-               BuildableName = "StocksCoreTests.xctest"
-               BlueprintName = "StocksCoreTests"
+               BuildableName = "StocksCore-Tests.xctest"
+               BlueprintName = "StocksCore-Tests"
                ReferencedContainer = "container:stocks.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		608A71F62CFAAF050081E8EC /* StocksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; };
 		608A71F72CFAAF050081E8EC /* StocksCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		60DDA7D72D001243003B4BF9 /* StocksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; };
 		60DDA8302D015211003B4BF9 /* StocksLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DDA82A2D015211003B4BF9 /* StocksLogger.framework */; };
 		60DDA8312D015211003B4BF9 /* StocksLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 60DDA82A2D015211003B4BF9 /* StocksLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		60DDA9502D02B2B3003B4BF9 /* StocksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; };
+		60DDA9512D02B2B3003B4BF9 /* StocksCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,20 @@
 			remoteGlobalIDString = 60DDA8292D015211003B4BF9;
 			remoteInfo = StocksLogger;
 		};
+		60DDA9692D02B4EC003B4BF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 608A71C92CFAAD130081E8EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 608A71D02CFAAD130081E8EC;
+			remoteInfo = Stocks;
+		};
+		60DDAA6D2D035A99003B4BF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 608A71C92CFAAD130081E8EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60DDA8292D015211003B4BF9;
+			remoteInfo = StocksLogger;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,13 +66,25 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		60DDA9522D02B2B3003B4BF9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				60DDA9512D02B2B3003B4BF9 /* StocksCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		608A71D12CFAAD130081E8EC /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		608A71F02CFAAF050081E8EC /* StocksCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StocksCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		60DDA7D32D001243003B4BF9 /* StocksCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StocksCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DDA7D32D001243003B4BF9 /* StocksCore-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StocksCore-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DDA82A2D015211003B4BF9 /* StocksLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StocksLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DDA9652D02B4EC003B4BF9 /* Stocks-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stocks-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -89,9 +116,40 @@
 				"Combine/AnyPublisher+Never.swift",
 				DI/IndirectInstantiation.swift,
 				DI/Lifetime.swift,
+				Models/Toast.swift,
 				"Trie Node/TrieNode.swift",
 			);
 			target = 608A71EF2CFAAF050081E8EC /* StocksCore */;
+		};
+		60DDA9872D02B84D003B4BF9 /* Exceptions for "Stocks-Tests" folder in "Stocks-Tests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Mocks/StocksService+Mock.swift",
+				Tests/StocksListViewModelTests.swift,
+			);
+			target = 60DDA9642D02B4EC003B4BF9 /* Stocks-Tests */;
+		};
+		60DDA98D2D02B87E003B4BF9 /* Exceptions for "StocksCore-Tests" folder in "Stocks" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TrieTests.swift,
+			);
+			target = 608A71D02CFAAD130081E8EC /* Stocks */;
+		};
+		60DDA98E2D02B87E003B4BF9 /* Exceptions for "StocksCore-Tests" folder in "StocksCore-Tests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TrieTests.swift,
+			);
+			target = 60DDA7D22D001243003B4BF9 /* StocksCore-Tests */;
+		};
+		60DDA98F2D02B8A8003B4BF9 /* Exceptions for "Stocks-Tests" folder in "Stocks" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Mocks/StocksService+Mock.swift",
+				Tests/StocksListViewModelTests.swift,
+			);
+			target = 608A71D02CFAAD130081E8EC /* Stocks */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -110,14 +168,27 @@
 			path = Stocks;
 			sourceTree = "<group>";
 		};
-		60DDA7D42D001243003B4BF9 /* StocksCoreTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StocksCoreTests;
-			sourceTree = "<group>";
-		};
 		60DDA82B2D015211003B4BF9 /* StocksLogger */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StocksLogger;
+			sourceTree = "<group>";
+		};
+		60DDA9832D02B84D003B4BF9 /* Stocks-Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				60DDA98F2D02B8A8003B4BF9 /* Exceptions for "Stocks-Tests" folder in "Stocks" target */,
+				60DDA9872D02B84D003B4BF9 /* Exceptions for "Stocks-Tests" folder in "Stocks-Tests" target */,
+			);
+			path = "Stocks-Tests";
+			sourceTree = "<group>";
+		};
+		60DDA98B2D02B87E003B4BF9 /* StocksCore-Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				60DDA98D2D02B87E003B4BF9 /* Exceptions for "StocksCore-Tests" folder in "Stocks" target */,
+				60DDA98E2D02B87E003B4BF9 /* Exceptions for "StocksCore-Tests" folder in "StocksCore-Tests" target */,
+			);
+			path = "StocksCore-Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -143,11 +214,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60DDA7D72D001243003B4BF9 /* StocksCore.framework in Frameworks */,
+				60DDA9502D02B2B3003B4BF9 /* StocksCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		60DDA8272D015211003B4BF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DDA9622D02B4EC003B4BF9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -161,8 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				608A71D32CFAAD130081E8EC /* Stocks */,
+				60DDA9832D02B84D003B4BF9 /* Stocks-Tests */,
 				604024A32CFD65D100FBBE15 /* StocksCore */,
-				60DDA7D42D001243003B4BF9 /* StocksCoreTests */,
+				60DDA98B2D02B87E003B4BF9 /* StocksCore-Tests */,
 				60DDA82B2D015211003B4BF9 /* StocksLogger */,
 				608A71D22CFAAD130081E8EC /* Products */,
 			);
@@ -173,8 +252,9 @@
 			children = (
 				608A71D12CFAAD130081E8EC /* Stocks.app */,
 				608A71F02CFAAF050081E8EC /* StocksCore.framework */,
-				60DDA7D32D001243003B4BF9 /* StocksCoreTests.xctest */,
+				60DDA7D32D001243003B4BF9 /* StocksCore-Tests.xctest */,
 				60DDA82A2D015211003B4BF9 /* StocksLogger.framework */,
+				60DDA9652D02B4EC003B4BF9 /* Stocks-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,6 +297,8 @@
 			fileSystemSynchronizedGroups = (
 				604024A32CFD65D100FBBE15 /* StocksCore */,
 				608A71D32CFAAD130081E8EC /* Stocks */,
+				60DDA9832D02B84D003B4BF9 /* Stocks-Tests */,
+				60DDA98B2D02B87E003B4BF9 /* StocksCore-Tests */,
 			);
 			name = Stocks;
 			packageProductDependencies = (
@@ -237,6 +319,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				60DDAA6E2D035A99003B4BF9 /* PBXTargetDependency */,
 			);
 			name = StocksCore;
 			packageProductDependencies = (
@@ -245,27 +328,25 @@
 			productReference = 608A71F02CFAAF050081E8EC /* StocksCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		60DDA7D22D001243003B4BF9 /* StocksCoreTests */ = {
+		60DDA7D22D001243003B4BF9 /* StocksCore-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60DDA7DA2D001243003B4BF9 /* Build configuration list for PBXNativeTarget "StocksCoreTests" */;
+			buildConfigurationList = 60DDA7DA2D001243003B4BF9 /* Build configuration list for PBXNativeTarget "StocksCore-Tests" */;
 			buildPhases = (
 				60DDA7CF2D001243003B4BF9 /* Sources */,
 				60DDA7D02D001243003B4BF9 /* Frameworks */,
 				60DDA7D12D001243003B4BF9 /* Resources */,
+				60DDA9522D02B2B3003B4BF9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				60DDA7D92D001243003B4BF9 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				60DDA7D42D001243003B4BF9 /* StocksCoreTests */,
-			);
-			name = StocksCoreTests;
+			name = "StocksCore-Tests";
 			packageProductDependencies = (
 			);
 			productName = StocksCoreTests;
-			productReference = 60DDA7D32D001243003B4BF9 /* StocksCoreTests.xctest */;
+			productReference = 60DDA7D32D001243003B4BF9 /* StocksCore-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		60DDA8292D015211003B4BF9 /* StocksLogger */ = {
@@ -291,6 +372,26 @@
 			productReference = 60DDA82A2D015211003B4BF9 /* StocksLogger.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		60DDA9642D02B4EC003B4BF9 /* Stocks-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60DDA96B2D02B4EC003B4BF9 /* Build configuration list for PBXNativeTarget "Stocks-Tests" */;
+			buildPhases = (
+				60DDA9612D02B4EC003B4BF9 /* Sources */,
+				60DDA9622D02B4EC003B4BF9 /* Frameworks */,
+				60DDA9632D02B4EC003B4BF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				60DDA96A2D02B4EC003B4BF9 /* PBXTargetDependency */,
+			);
+			name = "Stocks-Tests";
+			packageProductDependencies = (
+			);
+			productName = StocksTests;
+			productReference = 60DDA9652D02B4EC003B4BF9 /* Stocks-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -314,6 +415,10 @@
 					60DDA8292D015211003B4BF9 = {
 						CreatedOnToolsVersion = 16.1;
 					};
+					60DDA9642D02B4EC003B4BF9 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 608A71D02CFAAD130081E8EC;
+					};
 				};
 			};
 			buildConfigurationList = 608A71CC2CFAAD130081E8EC /* Build configuration list for PBXProject "stocks" */;
@@ -331,8 +436,9 @@
 			projectRoot = "";
 			targets = (
 				608A71D02CFAAD130081E8EC /* Stocks */,
+				60DDA9642D02B4EC003B4BF9 /* Stocks-Tests */,
 				608A71EF2CFAAF050081E8EC /* StocksCore */,
-				60DDA7D22D001243003B4BF9 /* StocksCoreTests */,
+				60DDA7D22D001243003B4BF9 /* StocksCore-Tests */,
 				60DDA8292D015211003B4BF9 /* StocksLogger */,
 			);
 		};
@@ -361,6 +467,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		60DDA8282D015211003B4BF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DDA9632D02B4EC003B4BF9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -398,6 +511,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		60DDA9612D02B4EC003B4BF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -415,6 +535,16 @@
 			isa = PBXTargetDependency;
 			target = 60DDA8292D015211003B4BF9 /* StocksLogger */;
 			targetProxy = 60DDA82E2D015211003B4BF9 /* PBXContainerItemProxy */;
+		};
+		60DDA96A2D02B4EC003B4BF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 608A71D02CFAAD130081E8EC /* Stocks */;
+			targetProxy = 60DDA9692D02B4EC003B4BF9 /* PBXContainerItemProxy */;
+		};
+		60DDAA6E2D035A99003B4BF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60DDA8292D015211003B4BF9 /* StocksLogger */;
+			targetProxy = 60DDAA6D2D035A99003B4BF9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -791,6 +921,42 @@
 			};
 			name = Release;
 		};
+		60DDA96C2D02B4EC003B4BF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FJ6MFU6M33;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasrababaei.StocksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stocks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Stocks";
+			};
+			name = Debug;
+		};
+		60DDA96D2D02B4EC003B4BF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FJ6MFU6M33;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasrababaei.StocksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stocks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Stocks";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -821,7 +987,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		60DDA7DA2D001243003B4BF9 /* Build configuration list for PBXNativeTarget "StocksCoreTests" */ = {
+		60DDA7DA2D001243003B4BF9 /* Build configuration list for PBXNativeTarget "StocksCore-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60DDA7DB2D001243003B4BF9 /* Debug */,
@@ -835,6 +1001,15 @@
 			buildConfigurations = (
 				60DDA8332D015211003B4BF9 /* Debug */,
 				60DDA8342D015211003B4BF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60DDA96B2D02B4EC003B4BF9 /* Build configuration list for PBXNativeTarget "Stocks-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60DDA96C2D02B4EC003B4BF9 /* Debug */,
+				60DDA96D2D02B4EC003B4BF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

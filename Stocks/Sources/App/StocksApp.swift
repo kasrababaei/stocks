@@ -4,9 +4,7 @@ import SwiftUI
 struct StocksApp: App {
   var body: some Scene {
     WindowGroup {
-      NavigationStack {
-        StocksListView(viewModel: StocksListViewModel())
-      }
+      StocksListView(viewModel: StocksListViewModel())
     }
   }
 }

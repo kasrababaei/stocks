@@ -1,14 +1,14 @@
 import Foundation
-import Combine
 import StocksCore
 import StocksLogger
 
 final class StocksListViewModel: StocksListViewViewModel {
-  private static let pageSize = 20
+  static let pageSize = 20
   
   @Published var items: [Item] = []
   var searchText: String = "" { didSet { searchBarTextDidChange() } }
-  var error: AnyPublisher<Error, Never> = .never()
+  @Published var toast: Toast? = nil
+  @Published var contentUnavailable: Bool = false
   
   private let trickerTrie = Trie<Int>()
   private let nameTrie = Trie<Int>()
@@ -24,6 +24,7 @@ final class StocksListViewModel: StocksListViewViewModel {
   
   func loadData() async {
     ConsoleLogger.log()
+    contentUnavailable = false
     
     guard !isLoading else { return }
     isLoading = true
@@ -33,8 +34,10 @@ final class StocksListViewModel: StocksListViewViewModel {
       items.removeAll()
     } catch {
       ConsoleLogger.log(level: .error, error)
+      toast = Toast(title: "Something went wrong.")
     }
     
+    contentUnavailable = stocks.isEmpty
     isLoading = false
     loadNext()
   }
@@ -52,7 +55,7 @@ final class StocksListViewModel: StocksListViewViewModel {
       return
     }
     
-    items.append(contentsOf: stocks[start...end].map { Item(stock: $0) })
+    items.append(contentsOf: stocks[start..<end].map { Item(stock: $0) })
     allItems = items
   }
   
@@ -86,6 +89,8 @@ final class StocksListViewModel: StocksListViewViewModel {
   }
   
   private func updateTries() {
+    [trickerTrie, nameTrie, currentPriceTrie].forEach { $0.removeAll() }
+    
     for (index, stock) in stocks.enumerated() {
       trickerTrie.insert(stock.ticker, value: index)
       nameTrie.insert(stock.name, value: index)
