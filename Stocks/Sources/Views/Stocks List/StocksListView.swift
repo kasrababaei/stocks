@@ -8,7 +8,7 @@ import SwiftUI
 protocol StocksListViewViewModel: ObservableObject {
   associatedtype Item: StockRowViewModel & Identifiable
   
-  var items: [Item] { get set }
+  var items: [Item] { get }
   var searchText: String { get set }
   var error: AnyPublisher<Error, Never> { get }
   
@@ -21,6 +21,7 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
   @Environment(\.isSearching) private var isSearching
   @State private var isLoading = false
   @State private var searchText = ""
+  @State private var taskId = UUID()
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -36,32 +37,35 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
         }
         
         Color.clear
-          .onAppear { viewModel.loadNext() }
+          .onAppear { loadNext() }
           .id(viewModel.items.last?.id)
       }
     }
-    .refreshable { await refresh() }
-    .task { [viewModel] in await viewModel.loadData() }
+    .refreshable {
+      guard !isLoading else { return }
+      taskId = UUID()
+    }
+    .task(id: taskId) { await loadData() }
     .searchable(text: $viewModel.searchText, prompt: Text("Search by name or ticker"))
     .navigationTitle("Stocks List")
-  }
-  
-  private func refresh() async {
-    ConsoleLogger.log()
-    
-    guard !isLoading else { return }
-    viewModel.items = []
-    isLoading = true
-    defer { isLoading = false }
-    await viewModel.loadData()
   }
   
   private func loadData() async {
     ConsoleLogger.log()
     
+    guard !isLoading else { return }
     isLoading = true
     defer { isLoading = false }
     await viewModel.loadData()
+  }
+  
+  private func loadNext() {
+    ConsoleLogger.log()
+    
+    guard !isLoading else { return }
+    isLoading = true
+    defer { isLoading = false }
+    viewModel.loadNext()
   }
 }
 

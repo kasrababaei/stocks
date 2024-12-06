@@ -7,22 +7,10 @@ public let getAPIClient = bind(AnyAPIClient.self, lifetime: .singleton) {
 }
 
 public protocol AnyAPIClient: Sendable {
-  func fetch<T: Decodable>(with url: URL) async throws -> T
-  
   func fetch(with url: URL) async throws -> Data
-  
-  func fetch(
-    with url: URL,
-    completionHandler: @escaping @Sendable (Result<Data, any Error>) -> Void
-  ) -> any Cancellable
 }
 
 private final class APIClient: AnyAPIClient {
-  func fetch<T>(with url: URL) async throws -> T where T : Decodable {
-    let data = try await fetch(with: url)
-    return try JSONDecoder().decode(T.self, from: data)
-  }
-  
   func fetch(
     with url: URL
   ) async throws -> Data {
@@ -72,7 +60,10 @@ private final class APIClient: AnyAPIClient {
       atomicCancellable.cancel()
     }
   }
-  
+}
+
+// MARK: - Private Functions
+extension AnyAPIClient {
   func fetch(
     with url: URL,
     completionHandler: @escaping @Sendable (Result<Data, any Error>) -> Void
@@ -92,7 +83,7 @@ private final class APIClient: AnyAPIClient {
     return task
   }
   
-  private func mapURLSessionResult(
+  func mapURLSessionResult(
     to completion: @escaping @Sendable (Result<Data, any Error>) -> Void
   ) -> @Sendable (Result<(data: Data?, response: HTTPURLResponse), any Error>) -> Void {
     { result in

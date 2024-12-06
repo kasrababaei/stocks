@@ -30,12 +30,12 @@ final class StocksListViewModel: StocksListViewViewModel {
     
     do {
       stocks = try await getStocksService().stocks()
-      isLoading = false
+      items.removeAll()
     } catch {
       ConsoleLogger.log(level: .error, error)
-      isLoading = false
     }
     
+    isLoading = false
     loadNext()
   }
   
@@ -67,8 +67,6 @@ final class StocksListViewModel: StocksListViewViewModel {
   
   private func filterStocks() {
     ConsoleLogger.log(searchText)
-    
-    
     
     let trickers = Set(trickerTrie.values(for: searchText))
     let names = Set(nameTrie.values(for: searchText))

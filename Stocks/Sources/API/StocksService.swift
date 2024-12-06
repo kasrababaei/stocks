@@ -11,7 +11,8 @@ protocol StocksService: Sendable {
 
 private struct StocksAPIService: StocksService {
   func stocks() async throws -> [Stock] {
-    try await getAPIClient().fetch<[Stock]>(with: Schema.stocks)
+    let data = try await getAPIClient().fetch(with: Schema.stocks)
+    return try JSONDecoder().decode([Stock].self, from: data)
   }
 }
 
