@@ -3,7 +3,7 @@ import SwiftUI
 protocol StockRowViewModel {
   var ticker: String { get }
   var name: String { get }
-  var currentPrice: String { get }
+  var currentPrice: Currency { get }
 }
 
 struct StockRow<ViewModel: StockRowViewModel>: View {
@@ -19,7 +19,7 @@ struct StockRow<ViewModel: StockRowViewModel>: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         
-        Text(viewModel.currentPrice)
+        Text(viewModel.currentPrice.amount, format: .currency(code: "CAD").precision(.fractionLength(2)))
       }
       
       Divider()
@@ -32,7 +32,7 @@ struct StockRow<ViewModel: StockRowViewModel>: View {
 private struct MockViewModel: StockRowViewModel {
   let name = "Vanguard FTSE Can All Cap"
   let ticker = "VCN"
-  let currentPrice = "$52.52"
+  let currentPrice: Currency = 100
 }
 
 #Preview {

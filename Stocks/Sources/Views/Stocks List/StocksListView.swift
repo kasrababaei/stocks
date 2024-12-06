@@ -9,19 +9,18 @@ protocol StocksListViewViewModel: ObservableObject {
   associatedtype Item: StockRowViewModel & Identifiable
   
   var items: [Item] { get set }
+  var searchText: String { get set }
   var error: AnyPublisher<Error, Never> { get }
   
   func loadData() async
   func loadNext()
-  func searchBarTextDidChange(_ searchText: String)
 }
 
 struct StocksListView<ViewModel: StocksListViewViewModel>: View {
   @ObservedObject private var viewModel: ViewModel
-  
+  @Environment(\.isSearching) private var isSearching
   @State private var isLoading = false
   @State private var searchText = ""
-  @Environment(\.isSearching) private var isSearching
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -37,16 +36,13 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
         }
         
         Color.clear
-          .onAppear { [viewModel] in viewModel.loadNext() }
+          .onAppear { viewModel.loadNext() }
           .id(viewModel.items.last?.id)
       }
     }
     .refreshable { await refresh() }
-    .task { await loadData() }
-    .searchable(text: $searchText, prompt: Text("Search by name or ticker"))
-    .onChange(of: searchText) { [viewModel] searchText in
-      viewModel.searchBarTextDidChange(searchText)
-    }
+    .task { [viewModel] in await viewModel.loadData() }
+    .searchable(text: $viewModel.searchText, prompt: Text("Search by name or ticker"))
     .navigationTitle("Stocks List")
   }
   
@@ -72,7 +68,7 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
 #if DEBUG
 private final class MockViewModel: StocksListViewViewModel {
   @Published var items: [Item] = []
-  let searchResult: [Item] = []
+  var searchText: String = ""
   var error: AnyPublisher<Error, Never> = .never()
   
   private let mockData: [Stock] = Stock.mockData(count: 50)
@@ -87,10 +83,6 @@ private final class MockViewModel: StocksListViewViewModel {
     guard end < mockData.count else { return }
     items.append(contentsOf: mockData[start...end].map(Item.init))
   }
-  
-  func searchBarTextDidChange(_ searchText: String) {
-    //
-  }
 }
 
 extension MockViewModel {
@@ -98,7 +90,7 @@ extension MockViewModel {
     let id = UUID().uuidString
     var ticker: String { stock.ticker }
     var name: String { stock.name }
-    var currentPrice: String { "$\(stock.currentPrice)" }
+    var currentPrice: Currency { stock.currentPrice }
     
     let stock: Stock
   }

@@ -4,10 +4,10 @@ import StocksCore
 import StocksLogger
 
 final class StocksListViewModel: StocksListViewViewModel {
-  private static let pageSize = 10
+  private static let pageSize = 20
   
   @Published var items: [Item] = []
-  @Published var searchResult: [Item] = []
+  var searchText: String = "" { didSet { searchBarTextDidChange() } }
   var error: AnyPublisher<Error, Never> = .never()
   
   private let trickerTrie = Trie<Int>()
@@ -20,6 +20,7 @@ final class StocksListViewModel: StocksListViewViewModel {
     didSet { updateTries() }
   }
   private var allItems: [Item] = []
+  var searchTask: Task<Void, Never>?
   
   func loadData() async {
     ConsoleLogger.log()
@@ -55,19 +56,19 @@ final class StocksListViewModel: StocksListViewViewModel {
     allItems = items
   }
   
-  private var searchTask: Task<Void, Never>?
-  
-  func searchBarTextDidChange(_ searchText: String) {
+  func searchBarTextDidChange() {
     searchTask?.cancel()
     searchTask = Task { [weak self] in
       try? await Task.sleep(for: .seconds(0.5))
       guard !Task.isCancelled else { return }
-      self?.filterStocks(searchText)
+      self?.filterStocks()
     }
   }
   
-  private func filterStocks(_ searchText: String) {
+  private func filterStocks() {
     ConsoleLogger.log(searchText)
+    
+    
     
     let trickers = Set(trickerTrie.values(for: searchText))
     let names = Set(nameTrie.values(for: searchText))

@@ -1,7 +1,7 @@
 public struct Stock: Decodable, Equatable, Sendable {
   public let name: String
   public let ticker: String
-  public let currentPrice: Double
+  public let currentPrice: Currency
 }
 
 #if DEBUG
@@ -11,7 +11,7 @@ extension Stock {
       Stock(
         name: "Stock Name [\($0)]",
         ticker: String("ABCDEFGH".shuffled()),
-        currentPrice: (100...200).randomElement().map(Double.init) ?? 0
+        currentPrice: (100...200).randomElement().map { Currency(amount: $0) } ?? 0
       )
     }
   }
