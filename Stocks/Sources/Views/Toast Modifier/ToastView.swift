@@ -2,7 +2,7 @@ import StocksCore
 import SwiftUI
 
 struct ToastView: View {
-  let toast: Toast
+  let toast: ToastDetail
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -18,7 +18,7 @@ struct ToastView: View {
     .padding(32)
     .background {
       RoundedRectangle(cornerRadius: 6)
-        .fill(Color("toast"))
+        .fill(Color("toastBackground"))
         .blur(radius: 6)
         .padding(6)
     }
@@ -27,9 +27,9 @@ struct ToastView: View {
 
 
 #if DEBUG
-private extension Toast {
-  static var mock: Toast {
-    Toast(title: "Mock Toast Message")
+private extension ToastDetail {
+  static var mock: ToastDetail {
+    ToastDetail(title: "Mock Toast Message")
   }
 }
 

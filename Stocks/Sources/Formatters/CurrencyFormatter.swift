@@ -1,12 +1,15 @@
 import Foundation
+import StocksCore
 
-//let getCurrencyFormatter
+let getCurrencyFormatter = bind(CurrencyFormatter.self, lifetime: .singleton) {
+  AnyCurrencyFormatter()
+}
 
 protocol CurrencyFormatter {
   func number(from string: String) -> Int?
 }
 
-struct AnyCurrencyFormatter: CurrencyFormatter {
+private struct AnyCurrencyFormatter: CurrencyFormatter {
   private let formatter: NumberFormatter = .init()
   
   func number(from string: String) -> Int? {

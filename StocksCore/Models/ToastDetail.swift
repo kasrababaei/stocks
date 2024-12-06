@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Toast: Identifiable, Equatable, Sendable {
+public struct ToastDetail: Identifiable, Equatable, Sendable {
   public let id: UUID
   public let title: String
   public let message: String?
@@ -10,9 +10,7 @@ public struct Toast: Identifiable, Equatable, Sendable {
     self.title = title
     self.message = message
   }
-}
-
-extension Toast {
+  
   public init(error: Error) {
     self.id = UUID()
     self.title = "Something went wrong"

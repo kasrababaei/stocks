@@ -2,7 +2,7 @@ import Foundation
 import StocksCore
 
 extension StocksListViewModel {
-  struct Item: StockRowViewModel, Identifiable {
+  struct Item: StockRowViewModel, Identifiable, Equatable {
     let id: String = UUID().uuidString
     var ticker: String { stock.ticker }
     var name: String { stock.name }

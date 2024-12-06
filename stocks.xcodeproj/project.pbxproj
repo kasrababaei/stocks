@@ -100,6 +100,7 @@
 				"Combine/AnyPublisher+Never.swift",
 				DI/IndirectInstantiation.swift,
 				DI/Lifetime.swift,
+				"Execution Context/ExecutionContext.swift",
 				"Trie Node/TrieNode.swift",
 			);
 			target = 608A71D02CFAAD130081E8EC /* Stocks */;
@@ -116,7 +117,8 @@
 				"Combine/AnyPublisher+Never.swift",
 				DI/IndirectInstantiation.swift,
 				DI/Lifetime.swift,
-				Models/Toast.swift,
+				"Execution Context/ExecutionContext.swift",
+				Models/ToastDetail.swift,
 				"Trie Node/TrieNode.swift",
 			);
 			target = 608A71EF2CFAAF050081E8EC /* StocksCore */;
@@ -124,6 +126,8 @@
 		60DDA9872D02B84D003B4BF9 /* Exceptions for "Stocks-Tests" folder in "Stocks-Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Mocks/CurrencyFormatter+Mock.swift",
+				"Mocks/ExecutionContext+Mock.swift",
 				"Mocks/StocksService+Mock.swift",
 				Tests/StocksListViewModelTests.swift,
 			);
@@ -146,6 +150,8 @@
 		60DDA98F2D02B8A8003B4BF9 /* Exceptions for "Stocks-Tests" folder in "Stocks" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Mocks/CurrencyFormatter+Mock.swift",
+				"Mocks/ExecutionContext+Mock.swift",
 				"Mocks/StocksService+Mock.swift",
 				Tests/StocksListViewModelTests.swift,
 			);

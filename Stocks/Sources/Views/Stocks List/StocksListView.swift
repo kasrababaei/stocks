@@ -9,7 +9,7 @@ protocol StocksListViewViewModel: ObservableObject {
   
   var items: [Item] { get }
   var searchText: String { get set }
-  var toast: Toast? { get set }
+  var toast: ToastDetail? { get set }
   var contentUnavailable: Bool { get }
   
   func loadData() async
@@ -84,7 +84,7 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
 private final class MockViewModel: StocksListViewViewModel {
   @Published var items: [Item] = []
   var searchText: String = ""
-  var toast: Toast? = nil
+  var toast: ToastDetail? = nil
   var contentUnavailable: Bool = false
   
   private let mockData: [Stock] = Stock.mockData(count: 50)

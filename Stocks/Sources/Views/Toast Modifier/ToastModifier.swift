@@ -2,7 +2,7 @@ import SwiftUI
 import StocksCore
 
 struct ToastModifier: ViewModifier {
-  @Binding var toast: Toast?
+  @Binding var toast: ToastDetail?
   @State private var task: Task<(), Never>?
   
   func body(content: Content) -> some View {
@@ -15,7 +15,7 @@ struct ToastModifier: ViewModifier {
       .onChange(of: toast) { _ in scheduleDismissal() }
   }
   
-  @ViewBuilder func toastBody(_ toast: Toast?) -> some View {
+  @ViewBuilder func toastBody(_ toast: ToastDetail?) -> some View {
     VStack {
       if let toast = toast {
         ToastView(toast: toast)
@@ -44,7 +44,7 @@ struct ToastModifier: ViewModifier {
 }
 
 extension View {
-  func present(toast: Binding<Toast?>) -> some View {
+  func present(toast: Binding<ToastDetail?>) -> some View {
     self.modifier(ToastModifier(toast: toast))
   }
 }
