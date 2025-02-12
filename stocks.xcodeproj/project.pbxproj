@@ -13,6 +13,7 @@
 		60DDA8312D015211003B4BF9 /* StocksLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 60DDA82A2D015211003B4BF9 /* StocksLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60DDA9502D02B2B3003B4BF9 /* StocksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; };
 		60DDA9512D02B2B3003B4BF9 /* StocksCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A1905E5E2D4D6C3000ADD125 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = A1905E5D2D4D6C3000ADD125 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		60DDA7D32D001243003B4BF9 /* StocksCore-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StocksCore-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DDA82A2D015211003B4BF9 /* StocksLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StocksLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DDA9652D02B4EC003B4BF9 /* Stocks-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stocks-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1905E0F2D4D683400ADD125 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -101,6 +103,10 @@
 				DI/IndirectInstantiation.swift,
 				DI/Lifetime.swift,
 				"Execution Context/ExecutionContext.swift",
+				"Execution Context/Task+Never.swift",
+				Models/Currency.swift,
+				Models/Stock.swift,
+				Models/ToastDetail.swift,
 				"Trie Node/TrieNode.swift",
 			);
 			target = 608A71D02CFAAD130081E8EC /* Stocks */;
@@ -118,6 +124,9 @@
 				DI/IndirectInstantiation.swift,
 				DI/Lifetime.swift,
 				"Execution Context/ExecutionContext.swift",
+				"Execution Context/Task+Never.swift",
+				Models/Currency.swift,
+				Models/Stock.swift,
 				Models/ToastDetail.swift,
 				"Trie Node/TrieNode.swift",
 			);
@@ -126,10 +135,12 @@
 		60DDA9872D02B84D003B4BF9 /* Exceptions for "Stocks-Tests" folder in "Stocks-Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Extensions/UIHostingController+Render.swift",
 				"Mocks/CurrencyFormatter+Mock.swift",
 				"Mocks/ExecutionContext+Mock.swift",
 				"Mocks/StocksService+Mock.swift",
 				Tests/StocksListViewModelTests.swift,
+				Tests/StocksListViewTests.swift,
 			);
 			target = 60DDA9642D02B4EC003B4BF9 /* Stocks-Tests */;
 		};
@@ -154,6 +165,7 @@
 				"Mocks/ExecutionContext+Mock.swift",
 				"Mocks/StocksService+Mock.swift",
 				Tests/StocksListViewModelTests.swift,
+				Tests/StocksListViewTests.swift,
 			);
 			target = 608A71D02CFAAD130081E8EC /* Stocks */;
 		};
@@ -235,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1905E5E2D4D6C3000ADD125 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +262,7 @@
 				604024A32CFD65D100FBBE15 /* StocksCore */,
 				60DDA98B2D02B87E003B4BF9 /* StocksCore-Tests */,
 				60DDA82B2D015211003B4BF9 /* StocksLogger */,
+				A1905E0E2D4D683400ADD125 /* Frameworks */,
 				608A71D22CFAAD130081E8EC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -263,6 +277,14 @@
 				60DDA9652D02B4EC003B4BF9 /* Stocks-Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A1905E0E2D4D683400ADD125 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1905E0F2D4D683400ADD125 /* XCTest.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +415,7 @@
 			);
 			name = "Stocks-Tests";
 			packageProductDependencies = (
+				A1905E5D2D4D6C3000ADD125 /* SnapshotTesting */,
 			);
 			productName = StocksTests;
 			productReference = 60DDA9652D02B4EC003B4BF9 /* Stocks-Tests.xctest */;
@@ -436,6 +459,9 @@
 			);
 			mainGroup = 608A71C82CFAAD130081E8EC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A1905E5C2D4D6C3000ADD125 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 608A71D22CFAAD130081E8EC /* Products */;
 			projectDirPath = "";
@@ -684,6 +710,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Stocks/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Stocks;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -720,6 +747,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Stocks/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Stocks;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1021,6 +1049,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A1905E5C2D4D6C3000ADD125 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = exactVersion;
+				version = 1.18.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1905E5D2D4D6C3000ADD125 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1905E5C2D4D6C3000ADD125 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 608A71C92CFAAD130081E8EC /* Project object */;
 }

@@ -9,7 +9,7 @@ final class StocksListViewModel: StocksListViewViewModel {
   var searchText: String = "" { didSet { searchBarTextDidChange() } }
   @Published var toast: ToastDetail? = nil
   @Published var contentUnavailable: Bool = false
-  
+
   private let trickerTrie = Trie<Int>()
   private let nameTrie = Trie<Int>()
   private let currentPriceTrie = Trie<Int>()

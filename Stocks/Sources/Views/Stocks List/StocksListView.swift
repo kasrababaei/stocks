@@ -27,7 +27,7 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
   }
-  
+
   var body: some View {
     NavigationStack {
       ScrollView {
@@ -80,39 +80,16 @@ struct StocksListView<ViewModel: StocksListViewViewModel>: View {
   }
 }
 
-#if DEBUG
-private final class MockViewModel: StocksListViewViewModel {
-  @Published var items: [Item] = []
-  var searchText: String = ""
-  var toast: ToastDetail? = nil
-  var contentUnavailable: Bool = false
-  
-  private let mockData: [Stock] = Stock.mockData(count: 50)
-  
-  func loadData() async {
-    items = Array(mockData.prefix(10)).map(Item.init)
-  }
-  
-  func loadNext() {
-    let start = items.count
-    let end = start + 10
-    guard end < mockData.count else { return }
-    items.append(contentsOf: mockData[start...end].map(Item.init))
-  }
+#if DEBUG && targetEnvironment(simulator)
+#Preview("Loaded") {
+  NavigationStack { StocksListView(viewModel: StocksListViewViewModel.Mock.loaded()) }
 }
 
-extension MockViewModel {
-  struct Item: StockRowViewModel, Identifiable {
-    let id = UUID().uuidString
-    var ticker: String { stock.ticker }
-    var name: String { stock.name }
-    var currentPrice: Currency { stock.currentPrice }
-    
-    let stock: Stock
-  }
+#Preview("Loading") {
+  NavigationStack { StocksListView(viewModel: StocksListViewViewModel.Mock.loading()) }
 }
 
-#Preview {
-  NavigationStack { StocksListView(viewModel: MockViewModel()) }
+#Preview("Content Unavailable") {
+  NavigationStack { StocksListView(viewModel: StocksListViewViewModel.Mock.contentUnavailable()) }
 }
 #endif

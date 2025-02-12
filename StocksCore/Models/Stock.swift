@@ -4,14 +4,14 @@ public struct Stock: Decodable, Equatable, Sendable {
   public let currentPrice: Currency
 }
 
-#if DEBUG
+#if DEBUG && targetEnvironment(simulator)
 extension Stock {
-  public static func mockData(count: Int = 300) -> [Stock] {
-    (0..<count).map {
+  public static func mockStocks(count: Int = 1) -> [Stock] {
+    (0..<count).map { index in
       Stock(
-        name: "Stock Name [\($0)]",
-        ticker: String("ABCDEFGH".shuffled()),
-        currentPrice: (100...200).randomElement().map { Currency(amount: $0) } ?? 0
+        name: "Stock Number [\(index)]",
+        ticker: "AAA",
+        currentPrice: Currency(amount: index)
       )
     }
   }

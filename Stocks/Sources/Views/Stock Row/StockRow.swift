@@ -1,4 +1,5 @@
 import SwiftUI
+import StocksCore
 
 protocol StockRowViewModel {
   var ticker: String { get }
