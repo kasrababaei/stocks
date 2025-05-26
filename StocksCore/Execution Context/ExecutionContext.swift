@@ -9,6 +9,8 @@ public protocol ExecutionContext {
   
   @discardableResult
   func execute(_ operation: sending @escaping @isolated(any) () async -> Void) -> Task<Void, Never>
+    
+    func dispatchQueueExecute(closure: @escaping () -> Void)
 }
 
 private struct DefaultExecutionContext: ExecutionContext {
@@ -20,4 +22,8 @@ private struct DefaultExecutionContext: ExecutionContext {
   func execute(_ operation: sending @escaping @isolated(any) () async -> Void) -> Task<Void, Never> {
     Task(operation: operation)
   }
+    
+    func dispatchQueueExecute(closure: @escaping () -> Void) {
+        DispatchQueue.main.async(execute: closure)
+    }
 }

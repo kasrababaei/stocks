@@ -18,4 +18,14 @@ final class MockExecutionContext: ExecutionContext {
     executeParameterList.append(operation)
     return executeReturnValue
   }
+    
+    var _executeCount: Int { _executeParameterList.count }
+  var _executeParameterList: [(() -> Void)] = []
+  var _executeOperation: (() -> Void)? { _executeParameterList.last }
+    func dispatchQueueExecute(closure: @escaping () -> Void) {
+        
+    _executeParameterList.append(closure)
+  }
+    
+    
 }

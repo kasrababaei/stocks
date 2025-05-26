@@ -14,6 +14,8 @@
 		60DDA9502D02B2B3003B4BF9 /* StocksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; };
 		60DDA9512D02B2B3003B4BF9 /* StocksCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 608A71F02CFAAF050081E8EC /* StocksCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1905E5E2D4D6C3000ADD125 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = A1905E5D2D4D6C3000ADD125 /* SnapshotTesting */; };
+		A1BFEA322D835EDC00CCE809 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = A1BFEA312D835EDC00CCE809 /* Quick */; };
+		A1BFEA342D835EE100CCE809 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = A1BFEA332D835EE100CCE809 /* Nimble */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,7 @@
 				"Mocks/CurrencyFormatter+Mock.swift",
 				"Mocks/ExecutionContext+Mock.swift",
 				"Mocks/StocksService+Mock.swift",
+				Tests/SignInView.Spec.swift,
 				Tests/StocksListViewModelTests.swift,
 				Tests/StocksListViewTests.swift,
 			);
@@ -164,6 +167,7 @@
 				"Mocks/CurrencyFormatter+Mock.swift",
 				"Mocks/ExecutionContext+Mock.swift",
 				"Mocks/StocksService+Mock.swift",
+				Tests/SignInView.Spec.swift,
 				Tests/StocksListViewModelTests.swift,
 				Tests/StocksListViewTests.swift,
 			);
@@ -247,6 +251,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1BFEA342D835EE100CCE809 /* Nimble in Frameworks */,
+				A1BFEA322D835EDC00CCE809 /* Quick in Frameworks */,
 				A1905E5E2D4D6C3000ADD125 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +422,8 @@
 			name = "Stocks-Tests";
 			packageProductDependencies = (
 				A1905E5D2D4D6C3000ADD125 /* SnapshotTesting */,
+				A1BFEA312D835EDC00CCE809 /* Quick */,
+				A1BFEA332D835EE100CCE809 /* Nimble */,
 			);
 			productName = StocksTests;
 			productReference = 60DDA9652D02B4EC003B4BF9 /* Stocks-Tests.xctest */;
@@ -461,6 +469,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A1905E5C2D4D6C3000ADD125 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				A1BFEA2F2D835EB800CCE809 /* XCRemoteSwiftPackageReference "Quick" */,
+				A1BFEA302D835ECB00CCE809 /* XCRemoteSwiftPackageReference "Nimble" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 608A71D22CFAAD130081E8EC /* Products */;
@@ -1059,6 +1069,22 @@
 				version = 1.18.0;
 			};
 		};
+		A1BFEA2F2D835EB800CCE809 /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		A1BFEA302D835ECB00CCE809 /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1066,6 +1092,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A1905E5C2D4D6C3000ADD125 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		A1BFEA312D835EDC00CCE809 /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1BFEA2F2D835EB800CCE809 /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		A1BFEA332D835EE100CCE809 /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1BFEA302D835ECB00CCE809 /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

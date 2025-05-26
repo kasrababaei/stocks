@@ -69,6 +69,10 @@ final class StocksListViewModel: StocksListViewViewModel {
       }
       await self?.filterStocks()
     }
+      
+      getExecutionContext().dispatchQueueExecute {
+          //
+      }
   }
   
   private func filterStocks() {
